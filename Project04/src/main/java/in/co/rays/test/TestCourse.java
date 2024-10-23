@@ -11,20 +11,20 @@ import in.co.rays.model.CourseModel;
 public class TestCourse {
 
 	public static void main(String[] args) throws Exception {
-//		testAdd();
+//		testAdd(); 
 //		testUpdate();
 //		testFindByPk();
 //		testFindByName();
 //		testSearch();
-		testDelete();
+//		testDelete();
 	}
 
 	public static void testAdd() throws Exception {
 		CourseBean bean = new CourseBean();
 
-		bean.setName("CA");
+		bean.setName("B.com");
 		bean.setDuration("3 year");
-		bean.setDescription("Chartered Accountancy");
+		bean.setDescription("B.com");
 		bean.setCreatedBy("admin@gmail.com");
 		bean.setModifiedBy("admin@gmail.com");
 		bean.setCreateDateTime(new Timestamp(new Date().getTime()));
@@ -36,7 +36,7 @@ public class TestCourse {
 
 	public static void testUpdate() throws Exception {
 		CourseModel model = new CourseModel();
-		CourseBean bean = model.findByPk(3);
+		CourseBean bean = model.findByPk(1);
 		bean.setDuration("2 year");
 
 		model.update(bean);
@@ -98,7 +98,7 @@ public class TestCourse {
 	public static void testDelete() throws Exception {
 		CourseModel model = new CourseModel();
 		
-		model.delete(4);
+		model.delete(5);
 	}
 
 }

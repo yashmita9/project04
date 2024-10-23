@@ -8,6 +8,7 @@ import java.util.List;
 
 import in.co.rays.bean.CollegeBean;
 import in.co.rays.bean.StudentBean;
+import in.co.rays.exception.DuplicateRecordException;
 import in.co.rays.util.JDBCDataSource;
 
 public class StudentModel {
@@ -30,7 +31,7 @@ public class StudentModel {
 		StudentBean existBean = findByEmail(bean.getEmail());
 
 		if (existBean != null) {
-			throw new RuntimeException("email already exist..!!");
+			throw new DuplicateRecordException("email is already exist.....!!!");
 		}
 
 		CollegeModel collegeModel = new CollegeModel();
@@ -103,7 +104,7 @@ public class StudentModel {
 		StudentBean existBean = findByEmail(bean.getEmail());
 
 		if (existBean != null && bean.getId() != existBean.getId()) {
-			throw new RuntimeException("email already exist..!!");
+			throw new DuplicateRecordException("email is already exist.....!!!");
 		}
 
 		CollegeModel collegeModel = new CollegeModel();

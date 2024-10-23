@@ -1,7 +1,6 @@
 package in.co.rays.bean;
 
-
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class UserBean extends BaseBean{
 
@@ -10,7 +9,7 @@ public class UserBean extends BaseBean{
 	private String login;
 	private String password;
 	private String confirmPassword;
-	private Timestamp dob;
+	private Date dob;
 	private String mobileNo;
 	private long roleId;
 	private String gender;
@@ -55,12 +54,11 @@ public class UserBean extends BaseBean{
 		this.confirmPassword = confirmPassword;
 	}
 
-
-	public Timestamp getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
-	public void setDob(Timestamp dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
@@ -86,6 +84,17 @@ public class UserBean extends BaseBean{
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	@Override
+	public String getKey() {
+		
+		return id+ "";
+	}
+
+	@Override
+	public String getValue() {
+		return firstName + " " + lastName;
 	}
 
 }

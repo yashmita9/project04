@@ -8,6 +8,7 @@ import java.util.List;
 
 import in.co.rays.bean.CourseBean;
 import in.co.rays.bean.SubjectBean;
+import in.co.rays.exception.DuplicateRecordException;
 import in.co.rays.util.JDBCDataSource;
 
 public class SubjectModel {
@@ -82,7 +83,7 @@ public class SubjectModel {
 
 		SubjectBean exist = findByName(bean.getName());
 		if (exist != null) {
-			throw new RuntimeException(" Subject is already exist");
+			throw new DuplicateRecordException("subject is already exist.....!!!");
 		}
 		
 		CourseModel coursemodel = new CourseModel();
@@ -117,7 +118,7 @@ public class SubjectModel {
 				"update st_subject set name = ?,course_id = ?,course_name = ?, description = ?, created_by =?, modified_by =?, created_datetime =?, modified_datetime =? where id =?");
 		SubjectBean exist = findByName(bean.getName());
 		if (exist != null && exist.getId() != bean.getId()) {
-			throw new RuntimeException(" subject is already exist");
+			throw new DuplicateRecordException("subject is already exist.....!!!");
 		}
 
 		CourseModel coursemodel = new CourseModel();

@@ -8,6 +8,7 @@ import java.util.List;
 import in.co.rays.bean.MarksheetBean;
 import in.co.rays.bean.StudentBean;
 import in.co.rays.bean.SubjectBean;
+import in.co.rays.exception.DuplicateRecordException;
 import in.co.rays.util.JDBCDataSource;
 
 public class MarksheetModel {
@@ -87,7 +88,7 @@ public class MarksheetModel {
 
 		MarksheetBean exist = findByRoll((bean.getRollNo()));
 		if (exist != null) {
-			throw new RuntimeException(" roll no is already exist");
+			throw new DuplicateRecordException("roll no is already exist.....!!!");
 		}
 		
 		StudentModel studentmodel = new StudentModel();
@@ -120,7 +121,7 @@ public class MarksheetModel {
 
 		MarksheetBean exist = findByRoll(bean.getRollNo());
 		if (exist != null && exist.getId() != bean.getId()) {
-			throw new RuntimeException(" roll no is already exist");
+			throw new DuplicateRecordException("roll no is already exist.....!!!");
 		}
 		
 		Connection conn = JDBCDataSource.getConnection();

@@ -13,18 +13,18 @@ import in.co.rays.model.UserModel;
 public class TestRole {
 
 	public static void main(String[] args) throws Exception {
-		// testAdd();
-		// testUpdate();
-		// testFindByName();
-		//testDelete();
-		testSearch();
+//		 testAdd();
+//		 testUpdate();
+//		 testFindByName();
+		testDelete();
+//		testSearch();
 	}
 
 	public static void testAdd() {
 		RoleModel model = new RoleModel();
 		RoleBean bean = new RoleBean();
-		bean.setName("yashmita");
-		bean.setDescription("Faculty");
+		bean.setName("staff");
+		bean.setDescription("staff");
 		bean.setCreatedBy("Admin");
 		bean.setModifiedBy("Admin");
 		bean.setCreateDateTime(new Timestamp(new Date().getTime()));
@@ -70,7 +70,7 @@ public class TestRole {
 
 		RoleModel model = new RoleModel();
 
-		model.delete(3);
+		model.delete(4);
 
 	}
 

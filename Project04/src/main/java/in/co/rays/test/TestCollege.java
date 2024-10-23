@@ -13,23 +13,23 @@ import in.co.rays.model.RoleModel;
 public class TestCollege {
 
 	public static void main(String[] args) throws Exception {
-		// testAdd();
-		// testUpdate();
-		//testFindByPk();
-		//testFindByName();
-		//testDelete();
-		testSearch();
+//		 testAdd();
+//		 testUpdate();
+//		testFindByPk();
+//		testFindByName();
+//		testDelete();
+//		testSearch();
 	}
 
 	public static void testAdd() throws Exception {
 		CollegeBean bean = new CollegeBean();
 		CollegeModel model = new CollegeModel();
 
-		bean.setName("Prestig College");
+		bean.setName("Swami Vivekanand College");
 		bean.setAddress("abp road");
 		bean.setState("MP");
 		bean.setCity("indore");
-		bean.setPhoneNo("6986357467");
+		bean.setPhoneNo("4567898765");
 		bean.setCreatedBy("yashmita@gmail.com");
 		bean.setModifiedBy("yashmita@gmail.com");
 		bean.setCreateDateTime(new Timestamp(new Date().getTime()));
@@ -41,8 +41,8 @@ public class TestCollege {
 
 	public static void testUpdate() throws Exception {
 		CollegeModel model = new CollegeModel();
-		CollegeBean bean = model.findByPk(1);
-		bean.setName("Oriental college");
+		CollegeBean bean = model.findByPk(4);
+		bean.setName("abc");
 
 		try {
 			model.update(bean);
@@ -55,7 +55,7 @@ public class TestCollege {
 	public static void testFindByPk() throws Exception {
 
 		CollegeModel model = new CollegeModel();
-		CollegeBean bean = model.findByPk(2);
+		CollegeBean bean = model.findByPk(4);
 
 		if (bean != null) {
 			System.out.println(bean.getId());
@@ -75,7 +75,7 @@ public class TestCollege {
 	public static void testFindByName() throws Exception {
 
 		CollegeModel model = new CollegeModel();
-		CollegeBean bean = model.findByName("LNCT College");
+		CollegeBean bean = model.findByName("abc");
 
 		if (bean != null) {
 			System.out.println(bean.getId());
@@ -94,7 +94,7 @@ public class TestCollege {
 	public static void testDelete() throws Exception {
 		CollegeModel model = new CollegeModel();
 		
-		model.delete(2);
+		model.delete(4);
 	}
 	
 	public static void testSearch() throws Exception {

@@ -9,8 +9,8 @@ import in.co.rays.model.FacultyModel;
 public class TestFaculty {
 
 	public static void main(String[] args)throws Exception {
-		testAdd();
-//		testUpdate();
+//		testAdd();
+		testUpdate();
 //		testDelete();
 	}
 
@@ -42,6 +42,7 @@ public class TestFaculty {
 		FacultyBean bean = model.findByPk(1);
 		
 		bean.setFirst_name("pihu");
+		bean.setEmail("shryti@gmail.com");
 		
 		model.update(bean);
 	}
