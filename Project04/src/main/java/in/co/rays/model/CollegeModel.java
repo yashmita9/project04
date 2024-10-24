@@ -262,4 +262,8 @@ public class CollegeModel {
 		return list;
 
 	}
+	
+	public List list() throws ApplicationException{
+		return search(null, 0, 0);
+	}
 }

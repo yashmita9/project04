@@ -1,6 +1,7 @@
 package in.co.rays.util;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,5 +65,29 @@ public class ServletUtility {
 
 	public static BaseBean getBean(HttpServletRequest request) {
 		return (BaseBean) request.getAttribute("bean");
+	}
+	
+	public static void setList(List list, HttpServletRequest request) {
+		request.setAttribute("list", list);
+	}
+	
+	public static List getList(HttpServletRequest request) {
+		return (List) request.getAttribute("list");
+	}
+	
+	public static void setPageNo(int pageNo, HttpServletRequest request) {
+		request.setAttribute("pageNo", pageNo);
+	}
+	
+	public static int getPageNo(HttpServletRequest request) {
+		return (Integer) request.getAttribute("pageNo");
+	}
+	
+	public static void setPageSize(int pageSize, HttpServletRequest request) {
+		request.setAttribute("pageSize", pageSize);
+	}
+	
+	public static int getPageSize(HttpServletRequest request) {
+		return (Integer) request.getAttribute("pageSize");
 	}
 }

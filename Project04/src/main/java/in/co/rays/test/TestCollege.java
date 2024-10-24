@@ -7,6 +7,7 @@ import java.util.List;
 
 import in.co.rays.bean.CollegeBean;
 import in.co.rays.bean.RoleBean;
+import in.co.rays.exception.ApplicationException;
 import in.co.rays.model.CollegeModel;
 import in.co.rays.model.RoleModel;
 
@@ -18,7 +19,7 @@ public class TestCollege {
 //		testFindByPk();
 //		testFindByName();
 //		testDelete();
-//		testSearch();
+		testList();
 	}
 
 	public static void testAdd() throws Exception {
@@ -103,6 +104,29 @@ public class TestCollege {
 		CollegeModel model = new CollegeModel();
 
 		List list = model.search(bean, 1, 5);
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = (CollegeBean) it.next();
+
+			System.out.println(bean.getId());
+			System.out.println(bean.getName());
+			System.out.println(bean.getAddress());
+			System.out.println(bean.getState());
+			System.out.println(bean.getCity());
+			System.out.println(bean.getPhoneNo());
+			System.out.println(bean.getCreatedBy());
+			System.out.println(bean.getModifiedBy());
+			System.out.println(bean.getCreateDateTime());
+			System.out.println(bean.getModifiedDateTime());
+		}
+	}
+	
+	public static void testList() throws Exception {
+		CollegeBean bean = new CollegeBean();
+		CollegeModel model = new CollegeModel();
+
+		List list = model.list();
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {

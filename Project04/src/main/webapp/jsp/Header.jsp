@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.ctl.ORSView"%>
 <%@page import="in.co.rays.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -10,32 +11,31 @@
 <body>
 	<%
 		UserBean user = (UserBean) session.getAttribute("user");
-		if (user != null) {
+		boolean userLoggedIn = user != null;
+		String welcomeMsg = "Hi, ";
+		if (userLoggedIn) {
 	%>
 
 	<h3>
-		Hi..<%=user.getFirstName()%>
+		<%
+			welcomeMsg += user.getFirstName();
+		%>
 	</h3>
-	<a href="UserCtl.do"><b>Add user</b></a>
-	<b>|</b>
-	<a href="UserListCtl.do"><b>User List</b></a>
-	<b>|</b>
-	<a href="LoginViewCtl?opreation=logout"><b>Logout</b></a>
-	<b>|</b>
-	<a href="AddMarksCtl"><b></b></a>
-	<b>|</b>
-	<a href=""><b> List</b></a>
-	
 	<%
 		} else {
 	%>
-	<h3>Hi Guest</h3>
-	<a href="WelcomeCtl"><b>Welcome |</b></a>
-	<a href="LoginViewCtl"><b>Login</b></a>
+	<h3>
+		<%
+			welcomeMsg += "Guest";
+		%>
+	</h3>
 	<%
 		}
 	%>
-
-<hr>
+	<h1 align="Right">
+		<img src="<%=ORSView.APP_CONTEXT%>/img/customLogo.jpg" width="318"
+			height="90">
+	</h1>
+	<hr>
 </body>
 </html>
