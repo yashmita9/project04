@@ -12,6 +12,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<%@include file="Header.jsp" %>
 <body>
 	<form action="<%=ORSView.USER_REGISTRATION_CTL%>" method="post">
 		<div align="center">
@@ -21,6 +22,15 @@
 			<h1>
 				<font color="navy">User Registration</font>
 			</h1>
+			
+			<h3>
+				<font color="green"> <%=ServletUtility.getSuccessMessage(request)%>
+				</font>
+			</h3>
+			<h3>
+				<font color="red"> <%=ServletUtility.getErrorMessage(request)%>
+				</font>
+			</h3>
 
 			<table>
 				<tr>

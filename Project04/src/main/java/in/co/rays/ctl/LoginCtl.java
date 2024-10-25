@@ -7,9 +7,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
+import com.mysql.cj.util.DnsSrv.SrvRecord;
+
 import in.co.rays.bean.BaseBean;
 import in.co.rays.bean.RoleBean;
 import in.co.rays.bean.UserBean;
+import in.co.rays.exception.ApplicationException;
+import in.co.rays.model.UserModel;
 import in.co.rays.util.DataUtility;
 import in.co.rays.util.DataValidator;
 import in.co.rays.util.PropertyReader;
@@ -34,7 +39,10 @@ public class LoginCtl extends BaseCtl{
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 		boolean pass = true;
-		
+		String op = DataUtility.getString(request.getParameter("operation"));
+		if(OP_SIGN_UP.equalsIgnoreCase(op)) {
+			return pass;
+		}
 		if (DataValidator.isNull(request.getParameter("login"))) {
 			request.setAttribute("login", PropertyReader.getValue("error.require", "Login Id"));
 			pass = false;
@@ -58,12 +66,32 @@ public class LoginCtl extends BaseCtl{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String op = DataUtility.getString(request.getParameter("operation"));
 		
+		UserModel model = new UserModel();
+		System.out.println("In Do post");
 		if (OP_SIGN_IN.equalsIgnoreCase(op)) {
 			UserBean bean = (UserBean) populateBean(request);
-			ServletUtility.setBean(bean, request);
-			ServletUtility.forward(getView(), request, response);
+			
+			try {
+				bean = model.authenticate(bean.getLogin(), bean.getPassword());
+				if(bean != null) {
+					System.out.println("In do post if bean");
+					//ServletUtility.setBean(bean, request);
+					ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
+				}else {
+					ServletUtility.setBean(bean, request);
+					ServletUtility.setErrorMessage("Login & Password is invalid", request);
+					ServletUtility.forward(getView(), request, response);
+				}
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else if(OP_SIGN_UP.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
 		}
 	}
 	
