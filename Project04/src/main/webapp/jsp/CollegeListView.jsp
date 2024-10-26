@@ -15,7 +15,7 @@
 </head>
 <%@include file="Header.jsp"%>
 <body>
-	<form action="<%=ORSView.COLLEGE_LIST_CTL%>" method="post">
+	<form action="<%=ORSView.COLLEGE_LIST_CTL%>" method="get">
 		<jsp:useBean id="bean" class="in.co.rays.bean.CollegeBean"
 			scope="request"></jsp:useBean>
 		<%
@@ -31,6 +31,7 @@
 			<table>
 				<tr>
 					<th>College Name:</th>
+					<td><%=HTMLUtility.getList("collegeId", DataUtility.getStringData(bean.getId()), collegeList)%></td>
 					
 				</tr>
 			</table>

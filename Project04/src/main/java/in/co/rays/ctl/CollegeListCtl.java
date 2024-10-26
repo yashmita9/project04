@@ -33,7 +33,8 @@ public class CollegeListCtl extends BaseCtl{
 		CollegeModel collegeModel = new CollegeModel();
 			try {
 				List collegeList = collegeModel.list();
-				request.setAttribute("collgegList", collegeList);
+				request.setAttribute("collegeList", collegeList);
+
 			} catch (ApplicationException e) {
 				e.printStackTrace();
 			}
@@ -42,7 +43,8 @@ public class CollegeListCtl extends BaseCtl{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pageNo = 1;
 		int pageSize = 10;
-		CollegeBean bean = null;
+		CollegeBean bean = new CollegeBean();
+
 		CollegeModel model = new CollegeModel();
 		
 		try {

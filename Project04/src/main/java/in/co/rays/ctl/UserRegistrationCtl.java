@@ -146,13 +146,13 @@ public class UserRegistrationCtl extends BaseCtl {
 				ServletUtility.setBean(bean, request);
 				ServletUtility.setSuccessMessage("User registration successfully..!!!", request);
 				ServletUtility.forward(getView(), request, response);
-			} catch (ApplicationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (DuplicateRecordException e) {
 				ServletUtility.setBean(bean, request);
 				ServletUtility.setErrorMessage("login id already exist", request);
 				ServletUtility.forward(getView(), request, response);
+			} catch (ApplicationException e) {
+				
+				e.printStackTrace();
 			}
 			
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
