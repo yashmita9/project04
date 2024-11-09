@@ -1,3 +1,4 @@
+<%@page import="in.co.rays.ctl.ProductCtl"%>
 <%@page import="in.co.rays.util.HTMLUtility"%>
 <%@page import="in.co.rays.util.DataUtility"%>
 <%@page import="in.co.rays.ctl.ProductListCtl"%>
@@ -20,7 +21,7 @@
 </style>
 <body>
 	<%@include file="Header.jsp"%>
-	<form action="<%=ORSView.PRODUCT_LIST_CTL%>">
+	<form action="<%=ORSView.PRODUCT_LIST_CTL%>" method="post">
 		<jsp:useBean id="bean" class="in.co.rays.bean.ProductBean"></jsp:useBean>
 		<div align="center">
 			<h1>
@@ -45,6 +46,10 @@
 			List productList = (List) request.getAttribute("productList");
 			
 		%>
+		
+		<input type="hidden" name="pageNo" value="<%=pageNo%>"> <input
+			type="hidden" name="pageSize" value="<%=pageSize%>">
+		
 		
 		<div align="center">
 			<table>
@@ -85,13 +90,13 @@
 			<tr align="center">
 				<th><input type="checkbox" class="case" name="ids"
 					value="<%=bean.getId()%>"></th>
-				<td><%=bean.getId()%></td>
+				<td><%=index++%></td>
 				<td><%=bean.getName()%></td>
 				<td><%=bean.getDescription()%></td>
 				<td><%=bean.getPrice()%></td>
 				<td><%=bean.getDop()%></td>
 				<td><%=bean.getCategory()%></td>
-				<td><a href="">edit</a></td>
+				<td><a href="<%=ORSView.PRODUCT_CTL%>?id=<%=bean.getId()%>">edit</a></td>
 			</tr>
 			
 			<%
@@ -112,7 +117,7 @@
 				<td style="text-align: right;"><input type="submit"
 					name="operation" value="<%=ProductListCtl.OP_NEXT%>"
 					<%=(nextPageSize != 0) ? "" : "disabled"%>></td>
-				</td>
+			
 			</tr>
 		</table>
 	</form>

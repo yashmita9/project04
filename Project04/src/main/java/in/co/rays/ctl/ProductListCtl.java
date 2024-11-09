@@ -66,71 +66,72 @@ public class ProductListCtl extends BaseCtl {
 			e.printStackTrace();
 		}
 
-		ServletUtility.forward(getView(), request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List list = null;
-		List next = null;
+		   List list = null;
+		    List next = null;
 
-		int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
-		int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
+		    int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
+		    int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
 
-		pageNo = (pageNo == 0) ? 1 : pageNo;
-		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
+		    pageNo = (pageNo == 0) ? 1 : pageNo;
+		    pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		ProductBean bean = (ProductBean) populateBean(request);
-		String op = DataUtility.getString(request.getParameter("operation"));
-		String[] ids = request.getParameterValues("ids");
+		    ProductBean bean = (ProductBean) populateBean(request);
+		    String op = DataUtility.getString(request.getParameter("operation"));
+		    String[] ids = request.getParameterValues("ids");
 
-		ProductModel model = new ProductModel();
-		
-		try {
-			if (OP_SEARCH.equalsIgnoreCase(op)) {
-				pageNo = 1;
-			
-			} else if (OP_NEXT.equalsIgnoreCase(op)) {
-				pageNo++;
-			} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
-				pageNo--;
-			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.PRODUCT_CTL, request, response);
-				return;
-			} else if (OP_DELETE.equalsIgnoreCase(op)) {
-				pageNo = 1;
-				if (ids != null && ids.length > 0) {
-					for (String id : ids) {
-						model.delete(DataUtility.getLong(id));
+		    ProductModel model = new ProductModel();
+		    
+			try {
+				if (OP_SEARCH.equalsIgnoreCase(op)) {
+					pageNo = 1;
+				
+				} else if (OP_NEXT.equalsIgnoreCase(op)) {
+					pageNo++;
+				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
+					pageNo--;
+				} else if (OP_NEW.equalsIgnoreCase(op)) {
+					ServletUtility.redirect(ORSView.PRODUCT_CTL, request, response);
+					return;
+				} else if (OP_DELETE.equalsIgnoreCase(op)) {
+					pageNo = 1;
+					if (ids != null && ids.length > 0) {
+						for (String id : ids) {
+							model.delete(DataUtility.getLong(id));
+						}
+						ServletUtility.setSuccessMessage("Data is deleted successfully", request);
+					} else {
+						ServletUtility.setErrorMessage("Select at least one record", request);
 					}
-					ServletUtility.setSuccessMessage("Data is deleted successfully", request);
-				} else {
-					ServletUtility.setErrorMessage("Select at least one record", request);
+				} else if (OP_RESET.equalsIgnoreCase(op) || OP_BACK.equalsIgnoreCase(op)) {
+					ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
+					return;
 				}
-			} else if (OP_RESET.equalsIgnoreCase(op) || OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
-				return;
+
+				ServletUtility.setBean(bean, request);
+				
+				list = model.search(bean, pageNo, pageSize);
+				next = model.search(bean, pageNo + 1, pageSize);
+
+				if (!OP_DELETE.equalsIgnoreCase(op) && (list == null || list.size() == 0)) {
+					ServletUtility.setErrorMessage("No record found", request);
+				}
+
+				request.setAttribute("nextListSize", next.size());
+				ServletUtility.setList(list, request);
+				ServletUtility.setPageNo(pageNo, request);
+				ServletUtility.setPageSize(pageSize, request);
+				ServletUtility.forward(getView(), request, response);
+
+			} catch (ApplicationException e) {
+				e.printStackTrace();
 			}
-			
-			ServletUtility.setBean(bean, request);
-			
-			list = model.search(bean, pageNo, pageSize);
-			next = model.search(bean, pageNo + 1, pageSize);
-			if (!OP_DELETE.equalsIgnoreCase(op) && (list == null || list.size() == 0)) {
-				ServletUtility.setErrorMessage("No record found", request);
-			}
-			request.setAttribute("nextListSize", next.size());
-			ServletUtility.setList(list, request);
-			ServletUtility.setPageNo(pageNo, request);
-			ServletUtility.setPageSize(pageSize, request);
-			ServletUtility.forward(getView(), request, response);
-
-		} catch (ApplicationException e) {
-			e.printStackTrace();
-		}
-
-
 	}
+
+
 
 	@Override
 	protected String getView() {

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.bean.BaseBean;
+import in.co.rays.bean.CollegeBean;
 import in.co.rays.bean.ProductBean;
 import in.co.rays.exception.ApplicationException;
 import in.co.rays.exception.DuplicateRecordException;
@@ -69,6 +70,21 @@ public class ProductCtl extends BaseCtl {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String op = DataUtility.getString(request.getParameter("operation"));
+		Long id = DataUtility.getLong(request.getParameter("id"));
+		
+		if(id>0) {
+			ProductModel model = new ProductModel();
+			
+			try {
+				ProductBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, request);
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		ServletUtility.forward(getView(), request, response);
 
 	}
@@ -93,8 +109,26 @@ public class ProductCtl extends BaseCtl {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}if(OP_UPDATE.equalsIgnoreCase(op)) {
+			try {
+				model.update(bean);
+				ProductBean productBean = model.findByPk(bean.getId()); 
+				ServletUtility.setBean(productBean, request);
+				ServletUtility.setSuccessMessage("Product updated Successfully....!!!", request);
+				ServletUtility.forward(getView(), request, response);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Product Name Is Duplicate...!!!", request);
+				ServletUtility.forward(getView(), request, response);
+			} catch (ApplicationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else if (OP_RESET.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.PRODUCT_CTL, request, response);
+			return;
+		}else if (OP_CANCLE.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
 			return;
 		}
 		ServletUtility.forward(getView(), request, response);

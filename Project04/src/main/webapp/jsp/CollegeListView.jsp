@@ -119,7 +119,7 @@
 				<td style="text-align: right;"><input type="submit"
 					name="operation" value="<%=CollegeListCtl.OP_NEXT%>"
 					<%=(nextPageSize != 0) ? "" : "disabled"%>></td>
-				</td>
+			
 			</tr>
 		</table>
 		<%
