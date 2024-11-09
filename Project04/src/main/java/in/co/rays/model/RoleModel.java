@@ -178,7 +178,7 @@ public class RoleModel {
 		return bean;
 	}
 
-	public List search(RoleBean bean, int pageNo, int pageSize) throws ApplicationException {
+	public static List search(RoleBean bean, int pageNo, int pageSize) throws ApplicationException {
 
 		Connection conn = null;
 		StringBuffer sql = new StringBuffer("select * from st_role where 1=1");
@@ -248,5 +248,10 @@ public class RoleModel {
 			JDBCDataSource.closeConnection(conn);
 		}
 
+	}
+	
+	public static List list() throws ApplicationException {
+		return search(null, 0, 0);
+		
 	}
 }

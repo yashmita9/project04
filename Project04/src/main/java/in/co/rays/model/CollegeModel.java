@@ -224,11 +224,18 @@ public class CollegeModel {
 			if (bean.getName() != null && bean.getName().length() > 0) {
 				sql.append(" and name like '" + bean.getName() + "%'");
 			}
+			if (bean.getCity() != null && bean.getCity().length() > 0) {
+				sql.append(" and city like '" + bean.getCity() + "%'");
+			}
+			if (bean.getId() > 0) {
+				sql.append(" and id = " + bean.getId());
+			}
 		}
 		if (pageSize > 0) {
 			pageNo = (pageNo - 1) * pageSize;
 			sql.append(" limit " + pageNo + ", " + pageSize);
 		}
+		System.out.println(sql);
 		List list = new ArrayList();
 
 		try {
@@ -262,8 +269,8 @@ public class CollegeModel {
 		return list;
 
 	}
-	
-	public List list() throws ApplicationException{
+
+	public List list() throws ApplicationException {
 		return search(null, 0, 0);
 	}
 }

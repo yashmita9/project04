@@ -19,7 +19,8 @@ public class TestCollege {
 //		testFindByPk();
 //		testFindByName();
 //		testDelete();
-		testList();
+//		testList();
+		testSearch();
 	}
 
 	public static void testAdd() throws Exception {
@@ -103,6 +104,8 @@ public class TestCollege {
 		CollegeBean bean = new CollegeBean();
 		CollegeModel model = new CollegeModel();
 
+		bean.setName("oriental");
+		bean.setCity("bhopal");
 		List list = model.search(bean, 1, 5);
 		Iterator it = list.iterator();
 

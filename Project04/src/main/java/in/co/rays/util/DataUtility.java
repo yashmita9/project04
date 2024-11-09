@@ -6,9 +6,9 @@ import java.util.Date;
 
 public class DataUtility {
 
-	public static final String APP_DATE_FORMAT = "dd-MM-yyyy";
+	public static final String APP_DATE_FORMAT = "yyyy-MM-dd";
 
-	public static final String APP_TIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
+	public static final String APP_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	private static final SimpleDateFormat formatter = new SimpleDateFormat(APP_DATE_FORMAT);
 
@@ -47,6 +47,14 @@ public class DataUtility {
 			return Long.parseLong(val);
 		} else {
 			return 0;
+		}
+	}
+	
+	public static Double getDouble(String val) {
+		if (DataValidator.isDouble(val)) {
+			return Double.parseDouble(val);
+		} else {
+			return (double) 0;
 		}
 	}
 

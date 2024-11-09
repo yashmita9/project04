@@ -10,31 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.bean.BaseBean;
 import in.co.rays.bean.CollegeBean;
-import in.co.rays.bean.UserBean;
+import in.co.rays.bean.ProductBean;
 import in.co.rays.exception.ApplicationException;
 import in.co.rays.model.CollegeModel;
-import in.co.rays.model.UserModel;
+import in.co.rays.model.ProductModel;
 import in.co.rays.util.DataUtility;
 import in.co.rays.util.PropertyReader;
 import in.co.rays.util.ServletUtility;
 
-@WebServlet(name = "CollegeListCtl", urlPatterns = "/CollegeListCtl")
-public class CollegeListCtl extends BaseCtl {
+@WebServlet(name = "ProductListCtl", urlPatterns = "/ProductListCtl")
+public class ProductListCtl extends BaseCtl {
 
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
-		CollegeBean bean = new CollegeBean();
-		bean.setCity(DataUtility.getString(request.getParameter("city")));
-		bean.setId(DataUtility.getLong(request.getParameter("collegeId")));
+		ProductBean bean = new ProductBean();
+		bean.setName(DataUtility.getString(request.getParameter("name")));
+		bean.setId(DataUtility.getLong(request.getParameter("productId")));
 		return bean;
 	}
 
 	@Override
 	protected void preload(HttpServletRequest request) {
-		CollegeModel collegeModel = new CollegeModel();
+		ProductModel productModel = new ProductModel();
 		try {
-			List collegeList = collegeModel.list();
-			request.setAttribute("collegeList", collegeList);
+			List productList = productModel.list();
+			request.setAttribute("productList", productList);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
@@ -43,34 +43,34 @@ public class CollegeListCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		List list = null;
 		List next = null;
-		
+
 		int pageNo = 1;
 		int pageSize = 10;
-		
-		CollegeBean bean = (CollegeBean) populateBean(request);
-		CollegeModel model = new CollegeModel();
+
+		ProductBean bean = (ProductBean) populateBean(request);
+		ProductModel model = new ProductModel();
 
 		try {
 			list = model.search(bean, pageNo, pageSize);
 			next = model.search(bean, pageNo + 1, pageSize);
-			
+
 			request.setAttribute("nextListSize", next.size());
 			ServletUtility.setList(list, request);
 			ServletUtility.setPageNo(pageNo, request);
 			ServletUtility.setPageSize(pageSize, request);
 			ServletUtility.forward(getView(), request, response);
 		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		ServletUtility.forward(getView(), request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List list = null;
 		List next = null;
 
@@ -80,12 +80,12 @@ public class CollegeListCtl extends BaseCtl {
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		CollegeBean bean = (CollegeBean) populateBean(request);
+		ProductBean bean = (ProductBean) populateBean(request);
 		String op = DataUtility.getString(request.getParameter("operation"));
 		String[] ids = request.getParameterValues("ids");
 
-		CollegeModel model = new CollegeModel();
-
+		ProductModel model = new ProductModel();
+		
 		try {
 			if (OP_SEARCH.equalsIgnoreCase(op)) {
 				pageNo = 1;
@@ -95,7 +95,7 @@ public class CollegeListCtl extends BaseCtl {
 			} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
 				pageNo--;
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.ADD_COLLEGE_CTL, request, response);
+				ServletUtility.redirect(ORSView.PRODUCT_CTL, request, response);
 				return;
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
@@ -108,19 +108,17 @@ public class CollegeListCtl extends BaseCtl {
 					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
 			} else if (OP_RESET.equalsIgnoreCase(op) || OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
 				return;
 			}
-
+			
 			ServletUtility.setBean(bean, request);
 			
 			list = model.search(bean, pageNo, pageSize);
 			next = model.search(bean, pageNo + 1, pageSize);
-
 			if (!OP_DELETE.equalsIgnoreCase(op) && (list == null || list.size() == 0)) {
 				ServletUtility.setErrorMessage("No record found", request);
 			}
-
 			request.setAttribute("nextListSize", next.size());
 			ServletUtility.setList(list, request);
 			ServletUtility.setPageNo(pageNo, request);
@@ -130,11 +128,14 @@ public class CollegeListCtl extends BaseCtl {
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
+
+
 	}
 
 	@Override
 	protected String getView() {
-		return ORSView.COLLEGE_LIST_VIEW;
+
+		return ORSView.PRODUCT_LIST_VIEW;
 	}
 
 }
