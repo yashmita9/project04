@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import in.co.rays.bean.CollegeBean;
 import in.co.rays.bean.RoleBean;
@@ -20,7 +21,15 @@ public class TestCollege {
 //		testFindByName();
 //		testDelete();
 //		testList();
-		testSearch();
+//		testSearch();
+		
+		  	PriorityQueue p = new PriorityQueue();
+			p.add(1);
+			p.add(2.3);
+			p.add(6);
+			p.add('A');
+			System.out.println(p);
+		
 	}
 
 	public static void testAdd() throws Exception {

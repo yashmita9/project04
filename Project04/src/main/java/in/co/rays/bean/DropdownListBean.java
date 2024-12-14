@@ -4,5 +4,6 @@ public interface DropdownListBean {
 
 	public String getKey();
 	public String getValue();
+	public String getvalue1();
 	
 }

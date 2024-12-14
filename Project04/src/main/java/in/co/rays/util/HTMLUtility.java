@@ -7,6 +7,7 @@ import java.util.Set;
 import in.co.rays.bean.BaseBean;
 import in.co.rays.bean.DropdownListBean;
 import in.co.rays.bean.UserBean;
+import in.co.rays.model.TaskModel;
 import in.co.rays.model.UserModel;
 
 public class HTMLUtility {
@@ -77,8 +78,38 @@ public class HTMLUtility {
 		return sb.toString();
 	}
 	
+	public static String getList2(String name , String selectedVal, List list) {
+		BaseBean bean=  (BaseBean) list.get(0);
+		System.out.println("my key => " +bean.getKey());
+		System.out.println("my value =>" +bean.getvalue1());
+		
+		List<DropdownListBean> dd = (List<DropdownListBean>) list;
+		
+		StringBuffer sb = new StringBuffer("<select style=\"width: 173px;text-align-last: center;\"; "
+				+ "class='form-control' name='" + name + "'>");
+		
+		sb.append("\n<option selected value=''> --Select-- </option>");
+		
+		String key = null;
+		String val = null;
+		
+		for(DropdownListBean obj : dd) {
+			key = obj.getKey();
+			val = obj.getvalue1();
+			
+			if (key.trim().equals(selectedVal)) {
+				sb.append("\n<option selected value='" + key + "'>" + val + "</option>");
+			} else {
+				sb.append("\n<option value='" + key + "'>" + val + "</option>");
+			}
+		}
+		sb.append("\n</select>");
+		return sb.toString();
+	}
+	
+	
 	public static void testGetListByList() throws Exception {
-		UserModel model = new UserModel();
+		TaskModel model = new TaskModel();
 		List<DropdownListBean> list = model.search(null, 0, 0);
 		
 		String selectedValue = null;
@@ -86,11 +117,25 @@ public class HTMLUtility {
 
 		System.out.println(htmlSelectFromList);
 	}
+	
+	public static void testGetListByList2() throws Exception {
+		TaskModel model = new TaskModel();
+		List<DropdownListBean> list = model.search(null, 0, 0);
+		
+		String selectedValue = null;
+		String htmlSelectFromList = HTMLUtility.getList2("name", selectedValue, list);
+
+		System.out.println(htmlSelectFromList);
+	}
+	
+	
 	public static void main(String[] args) throws Exception {
 
 //		 testGetListByMap();
 
-		testGetListByList();
+		testGetListByList2();
 
 	}
+	
 }
+

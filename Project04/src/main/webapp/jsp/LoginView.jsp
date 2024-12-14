@@ -10,6 +10,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/msg.css">
 </head>
 <%@include file="Header.jsp" %>
 <body>
@@ -23,9 +24,9 @@
 			</h1>
 			
 			<div style="height: 15px; margin-bottom: 12px">
-				<H4 align="center">
-					<font color="red"> <%=ServletUtility.getErrorMessage(request)%>
-					</font>
+				<H4 align="center" class="error">
+					<%=ServletUtility.getErrorMessage(request)%>
+					
 				</H4>
 				
 			</div>

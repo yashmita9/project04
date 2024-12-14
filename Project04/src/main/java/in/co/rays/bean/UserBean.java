@@ -97,4 +97,10 @@ public class UserBean extends BaseBean{
 		return firstName + " " + lastName;
 	}
 
+	@Override
+	public String getvalue1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

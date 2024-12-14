@@ -62,4 +62,10 @@ public class ProductBean extends BaseBean {
 		return category;
 	}
 
+	@Override
+	public String getvalue1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

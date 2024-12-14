@@ -60,18 +60,29 @@
 					Profile</a> | <a href="<%=ORSView.CHANGE_PASSWORD_CTL%>">Change
 					Password</a> | <a href="<%=ORSView.GET_MARKSHEET_CTL%>">Get
 					Marksheet</a> | <a href="<%=ORSView.MARKSHEET_MERIT_LIST_CTL%>">Marksheet
-					Merit List </a> |<a href="<%=ORSView.PRODUCT_CTL%>">Add Product
-					</a>  |<a href="<%=ORSView.PRODUCT_LIST_CTL%>">Product List
-					</a> <%
- 	if (userBean.getRoleId() == RoleBean.ADMIN) {
- %> | <a href="<%=ORSView.ADD_COLLEGE_CTL%>">Add College</a> | <a
+					Merit List </a> |<a href="<%=ORSView.PRODUCT_CTL%>">Add Product </a> |<a
+				href="<%=ORSView.PRODUCT_LIST_CTL%>">Product List </a>|<a
+				href="<%=ORSView.INITIATIVE_CTL%>">Add Initiative </a> |<a
+				href="<%=ORSView.INITIATIVE_LIST_CTL%>">Initiative List </a>|<a
+				href="<%=ORSView.TASK_CTL%>">Add Task </a> |<a
+				href="<%=ORSView.TASK_LIST_CTL%>">Task List </a>|<a
+				href="<%=ORSView.SHOP_CTL%>">Add Shopping Cart </a> |<a
+				href="<%=ORSView.SHOP_LIST_CTL%>">Shopping Cart List </a> |<a
+				href="<%=ORSView.DOCTOR_CTL%>">Add Doctor </a> |<a
+				href="<%=ORSView.DOCTOR_LIST_CTL%>">Doctor List </a> <%
+				if (userBean.getRoleId() == RoleBean.ADMIN) {
+			%> | <a href="<%=ORSView.ADD_COLLEGE_CTL%>">Add College</a> | <a
 				href="<%=ORSView.COLLEGE_LIST_CTL%>">College List</a> | <a
 				href="<%=ORSView.MARKSHEET_CTL%>">Add Marksheet</a> | <a
 				href="<%=ORSView.MARKSHEET_LIST_CTL%>">Marksheet List</a> | <a
 				href="<%=ORSView.USER_CTL%>">Add User</a> | <a
 				href="<%=ORSView.USER_LIST_CTL%>">User List</a> | <a
 				href="<%=ORSView.ROLE_CTL%>">Add Role</a> | <a
-				href="<%=ORSView.ROLE_LIST_CTL%>">Role List</a> <%
+				href="<%=ORSView.ROLE_LIST_CTL%>">Role List</a> | <a
+				href="<%=ORSView.PATIENT_CTL%>">Add Patient</a>| <a
+				href="<%=ORSView.PATIENT_LIST_CTL%>">Patient List</a>|<a
+				href="<%=ORSView.EMPLOYEE_CTL%>">Add Employee</a>|<a
+				href="<%=ORSView.EMPLOYEE_LIST_CTL%>">Employee List</a> <%
  	}
 
  		if (userBean.getRoleId() == RoleBean.COLLEGE || userBean.getRoleId() == RoleBean.ADMIN) {

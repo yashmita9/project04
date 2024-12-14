@@ -77,22 +77,22 @@
 				<tr>
 					<th></th>
 					<%
-					if(bean!= null && bean.getId()>0){
-						
-				%>
+						if (bean != null && bean.getId() > 0) {
+					%>
 					<td align="left" colspan="2"><input type="submit"
 						name="operation" value="<%=ProductCtl.OP_UPDATE%>"> <input
 						type="submit" name="operation" value="<%=ProductCtl.OP_CANCLE%>">
-						<%	} else {
- %>
+						<%
+							} else {
+						%>
 					<td><input type="submit" name="operation"
 						value="<%=ProductCtl.OP_SAVE%>">&nbsp; <input
 						type="submit" name="operation" value="<%=ProductCtl.OP_RESET%>"></td>
-						<%
-						} 
-						%>
+					<%
+						}
+					%>
 				</tr>
-				
+
 			</table>
 		</div>
 

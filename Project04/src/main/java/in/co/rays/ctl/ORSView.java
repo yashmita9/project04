@@ -38,6 +38,18 @@ public interface ORSView {
 	public String FACULTY_LIST_VIEW = PAGE_FOLDER + "/FacultyListView.jsp";
 	public String PRODUCT_VIEW = PAGE_FOLDER + "/ProductView.jsp";
 	public String PRODUCT_LIST_VIEW = PAGE_FOLDER + "/ProductListView.jsp";
+	public String INITIATIVE_VIEW = PAGE_FOLDER + "/InitiativeView.jsp";
+	public String INITIATIVE_LIST_VIEW = PAGE_FOLDER + "/InitiativeListView.jsp";
+	public String PATIENT_VIEW = PAGE_FOLDER + "/PatientView.jsp";
+	public String PATIENT_LIST_VIEW = PAGE_FOLDER + "/PatientListView.jsp";
+	public String EMPLOYEE_VIEW = PAGE_FOLDER + "/EmployeeView.jsp";
+	public String EMPLOYEE_LIST_VIEW = PAGE_FOLDER + "/EmployeeListView.jsp";
+	public String TASK_VIEW = PAGE_FOLDER + "/TaskView.jsp";
+	public String TASK_LIST_VIEW = PAGE_FOLDER + "/TaskListView.jsp";
+	public String SHOP_VIEW = PAGE_FOLDER + "/ShopView.jsp";
+	public String SHOP_LIST_VIEW = PAGE_FOLDER + "/ShopListView.jsp";
+	public String DOCTOR_VIEW = PAGE_FOLDER + "/DoctorView.jsp";
+	public String DOCTOR_LIST_VIEW = PAGE_FOLDER + "/DoctorListView.jsp";
 
 	
 	//All ctl Links.................
@@ -70,4 +82,17 @@ public interface ORSView {
 	public String FACULTY_LIST_CTL = APP_CONTEXT + "/FacultyListCtl";
 	public String PRODUCT_CTL = APP_CONTEXT + "/ProductCtl";
 	public String PRODUCT_LIST_CTL = APP_CONTEXT + "/ProductListCtl";
+	public String INITIATIVE_CTL = APP_CONTEXT + "/InitiativeCtl";
+	public String INITIATIVE_LIST_CTL = APP_CONTEXT + "/InitiativeListCtl";
+	public String PATIENT_CTL = APP_CONTEXT + "/PatientCtl";
+	public String PATIENT_LIST_CTL = APP_CONTEXT + "/PatientListCtl";
+	public String EMPLOYEE_CTL = APP_CONTEXT + "/EmployeeCtl";
+	public String EMPLOYEE_LIST_CTL = APP_CONTEXT + "/EmployeeListCtl";
+	public String TASK_CTL = APP_CONTEXT + "/TaskCtl";
+	public String TASK_LIST_CTL = APP_CONTEXT + "/TaskListCtl";
+	public String SHOP_CTL = APP_CONTEXT + "/ShopCtl";
+	public String SHOP_LIST_CTL = APP_CONTEXT + "/ShopListCtl";
+	public String DOCTOR_CTL = APP_CONTEXT + "/DoctorCtl";
+	public String DOCTOR_LIST_CTL = APP_CONTEXT + "/DoctorListCtl";
+
 }
